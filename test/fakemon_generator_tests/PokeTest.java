@@ -13,8 +13,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import ptu_fakemon_generator.Pokemon;
-import ptu_fakemon_generator.TypeList;
-import ptu_fakemon_generator.Typing;
+import Type.TypeList;
+import Type.Typing;
 
 /**
  *
