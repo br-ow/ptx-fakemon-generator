@@ -20,6 +20,8 @@ public class TypeList {
     private static TypeList instance;
     private static ArrayList<String> all_types; //The actual list of types that we are generating from
     private final Random rand;
+    private int single_type_weight; //chance of getting a single-type 'mon
+    private int dual_type_weight; //chance of getting a dual-type 'mon
     
     //Private Constructor (necessary for singleton)
     private TypeList() {
@@ -35,6 +37,9 @@ public class TypeList {
         
         rand = new Random(); //For random number generation
         //Using Random() instead of ThreadLocalRandom for ease of testing later.
+        
+        single_type_weight = 1; //nonzero chance
+        dual_type_weight = 1; //equal with single_type_weight (for now at least)
     }
     
     //If instance doesn't exist, create it. Either way, return it.
@@ -50,7 +55,18 @@ public class TypeList {
         //Generate a primary type; equal chance of any type on the list
         int which_primary = rand.nextInt(all_types.size());
         
-        //Pass the generated primary type to the Typing constructor and return it
-        return new Typing(all_types.get(which_primary));
-    }
+        //Does this typing have a secondary type?
+        int single_or_dual = rand.nextInt(single_type_weight + dual_type_weight);
+        if (single_or_dual < single_type_weight) { //single-type fakemon generated
+            //Pass the generated primary type to the Typing constructor and return it
+            return new Typing(all_types.get(which_primary));
+        }
+        else { //dual-type fakemon generated
+            //Generate a second type; equal chance of any type on the list
+            int which_secondary = rand.nextInt(all_types.size());
+            //Pass the generated types to the Typing constructor and return it
+            return new Typing(all_types.get(which_primary), all_types.get(which_secondary));
+        }
+    }//end function
+    
 }

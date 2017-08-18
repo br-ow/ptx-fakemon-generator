@@ -471,9 +471,11 @@ public class PokeTest {
         assertTrue(new_typing.getPrimary() != "None");
     }
     
-    //Test that the primary type is not the same every time.
-    @Test
-    public void typingUniquenessTest() {
+    /**
+     * Test that the primary type is not the same every time.
+     */
+        @Test
+    public void primaryTypingUniquenessTest() {
         TypeList types = TypeList.getInstance();
         Typing typing = types.genRandomTyping();
         Typing typing_two = types.genRandomTyping();
@@ -498,6 +500,40 @@ public class PokeTest {
         typing_list.add(typing_eight.getPrimary());
         typing_list.add(typing_nine.getPrimary());
         typing_list.add(typing_ten.getPrimary());
+        
+        assertFalse(areAllIdentical(typing_list));
+        
+    }
+    
+    /**
+     * Test that the secondary type is not the same every time.
+     */
+        @Test
+    public void secondaryTypingUniquenessTest() {
+        TypeList types = TypeList.getInstance();
+        Typing typing = types.genRandomTyping();
+        Typing typing_two = types.genRandomTyping();
+        Typing typing_three = types.genRandomTyping();
+        Typing typing_four = types.genRandomTyping();
+        Typing typing_five = types.genRandomTyping();
+        Typing typing_six = types.genRandomTyping();
+        Typing typing_seven = types.genRandomTyping();
+        Typing typing_eight = types.genRandomTyping();
+        Typing typing_nine = types.genRandomTyping();
+        Typing typing_ten = types.genRandomTyping();
+        
+        //Add all of the generated primary types to a list so that we can more easily compare them
+        ArrayList typing_list = new ArrayList ();
+        typing_list.add(typing.getSecondary());
+        typing_list.add(typing_two.getSecondary());
+        typing_list.add(typing_three.getSecondary());
+        typing_list.add(typing_four.getSecondary());
+        typing_list.add(typing_five.getSecondary());
+        typing_list.add(typing_six.getSecondary());
+        typing_list.add(typing_seven.getSecondary());
+        typing_list.add(typing_eight.getSecondary());
+        typing_list.add(typing_nine.getSecondary());
+        typing_list.add(typing_ten.getSecondary());
         
         assertFalse(areAllIdentical(typing_list));
         
